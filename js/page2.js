@@ -210,30 +210,30 @@ $(function(){
                     },
                     type: "POST",
                     data: url,
-                    success: function(data) {
-                        if(data[0]) {
-                            var resultOfFrame = data[0];
-                            if(resultOfFrame && resultOfFrame.faceAttributes) {
-                                var faceAttributes = resultOfFrame.faceAttributes;
-                                var faceAttributesEmotions = faceAttributes.emotion;
-                                videoStats[0] += faceAttributesEmotions.anger;
-                                videoStats[1] += faceAttributesEmotions.contempt;
-                                videoStats[2] += faceAttributesEmotions.disgust;
-                                videoStats[3] += faceAttributesEmotions.fear;
-                                videoStats[4] += faceAttributesEmotions.happiness;
-                                videoStats[5] += faceAttributesEmotions.neutral;
-                                videoStats[6] += faceAttributesEmotions.sadness;
-                                videoStats[7] += faceAttributesEmotions.surprise;
-                                smile += faceAttributes.smile;
-                            }
-                        }     
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                         var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
-                        errorString += (jqXHR.responseText === "") ? "" : ($.parseJSON(jqXHR.responseText).message) ?
-                        $.parseJSON(jqXHR.responseText).message : $.parseJSON(jqXHR.responseText).error.message;
-                        console.log(errorString);
+                })
+                .done(function(data) {
+                    if(data[0]) {
+                        var resultOfFrame = data[0];
+                        if(resultOfFrame && resultOfFrame.faceAttributes) {
+                            var faceAttributes = resultOfFrame.faceAttributes;
+                            var faceAttributesEmotions = faceAttributes.emotion;
+                            videoStats[0] += faceAttributesEmotions.anger;
+                            videoStats[1] += faceAttributesEmotions.contempt;
+                            videoStats[2] += faceAttributesEmotions.disgust;
+                            videoStats[3] += faceAttributesEmotions.fear;
+                            videoStats[4] += faceAttributesEmotions.happiness;
+                            videoStats[5] += faceAttributesEmotions.neutral;
+                            videoStats[6] += faceAttributesEmotions.sadness;
+                            videoStats[7] += faceAttributesEmotions.surprise;
+                            smile += faceAttributes.smile;
+                        }
                     }
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+                    errorString += (jqXHR.responseText === "") ? "" : ($.parseJSON(jqXHR.responseText).message) ?
+                    $.parseJSON(jqXHR.responseText).message : $.parseJSON(jqXHR.responseText).error.message;
+                    console.log(errorString);
                 })
             );
             $.when.apply(null, requests).then(function(){
@@ -248,16 +248,16 @@ $(function(){
     
     $("#uploadFeed").off('click');
     $("#uploadFeed").on('click', function(e){ 
-        var url = "http://selfenhancer.azurewebsites.net/api/Frame?videoName=" + $("#videoSelect").val();
+        //var url = "http://selfenhancer.azurewebsites.net/api/Frame?videoName=" + $("#videoSelect").val();
 
-        //var url = "http://localhost:52245/api/Frame?videoName=" + $("#videoSelect").val();
+        var url = "http://localhost:52245/api/Frame?videoName=" + $("#videoSelect").val();
 
-        var url = "";
-        if(!$("#loadFast").prop("checked")) {
-            url = "http://selfenhancer.azurewebsites.net/api/Frame?videoName=" + $("#videoSelect").val();
-        } else {
-            url = "http://selfenhancer.azurewebsites.net/api/Frame?token=" + $("#videoSelect").find(":selected").data("fast") + "&data=''";
-        }
+//        var url = "";
+//        if(!$("#loadFast").prop("checked")) {
+//            url = "http://selfenhancer.azurewebsites.net/api/Frame?videoName=" + $("#videoSelect").val();
+//        } else {
+//            url = "http://selfenhancer.azurewebsites.net/api/Frame?token=" + $("#videoSelect").find(":selected").data("fast") + "&data=''";
+//        }
         
         $('<div class="modal-backdrop"></div>').appendTo(document.body);
         spinner.spin();
