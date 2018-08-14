@@ -1,3 +1,5 @@
+https://devpost.com/software/iea
+
 What it does:
 1. Record/Upload your video speaking(for some occasion like say debate, interview or funeral).
 2. IEA will analyze your expressions and vocal tone describing you on how are you are being perceived by others.
@@ -24,3 +26,10 @@ Microsoft Azure Cloud Services, Cognitive Services APIs.
 What's next for IEA:
 
 Personalized Training Module for Training self in a particular expression domain.
+
+Targeted Audience:
+
+1. Autism Struck Children, often, respond well to technology.
+2. Introverts who often want to be heard, but their fear keeps them away.
+3. Students preparing for competitions – debates, elocutions!
+4. Everyone preparing for Interviews And rather, Everyone who want to understand who they would be perceived.
